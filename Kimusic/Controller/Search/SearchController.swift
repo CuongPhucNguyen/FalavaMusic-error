@@ -26,13 +26,12 @@ class SearchGetter: ObservableObject{
                     throw APIError.error("Link Repose Fail")
                 }
                 let decoded = try JSONDecoder().decode(Prediction.self, from: data) // ZingHome
-                
                 if(decoded.err == -201){
                     Task{
                         await suggestion(JsonUrl: JsonUrl)
                     }
                 } else{
-                    return decoded.data!.items![0].itemSuggestions!
+                    return decoded.data!.items![0].suggestions!
                 }
             
             } catch {

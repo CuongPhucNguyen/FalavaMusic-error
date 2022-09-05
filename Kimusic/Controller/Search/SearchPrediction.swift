@@ -11,13 +11,13 @@ struct Prediction: Codable, Hashable{
 
 // MARK: - DataClass
 struct DataClassPrediction: Codable, Hashable {
-    var items: [ItemPrediction]?
+    var items: [items]?
 }
 
 // MARK: - Item
-struct ItemPrediction: Codable, Hashable {
+struct items: Codable, Hashable {
     var keywords: [Keyword]?
-    var itemSuggestions: [Suggestion]?
+    var suggestions: [Suggestion]?
 }
 
 // MARK: - Keyword
