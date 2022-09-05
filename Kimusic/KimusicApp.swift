@@ -31,8 +31,9 @@ struct KimusicApp: App {
                 .onAppear{
                    
 
-                    signup(email: "dat@mail.com", password: "1234567")
-                    print(Auth.auth().currentUser?.email!)
+//                    signup(email: "tintin123k@gmail.com", password: "1234567", displayName: "tin", photoURL: "https://i.kym-cdn.com/photos/images/original/001/513/767/998.png")
+                    login(email: "tintin123k@gmail.com", password: "1234567")
+                    print(currentUser()?.email)
 //                    var handle = Auth.auth().addStateDidChangeListener { auth, user in
 //                        print(user?.email)
 //                    }

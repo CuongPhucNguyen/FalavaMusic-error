@@ -28,20 +28,24 @@ struct SearchScreen: View {
                             search = ""
                             search.append(url)
                             search.append(SearchGetter.inputFormatter(keywords: keyword))
-                            self.keywordSuggestions = await  searchResults.keyword(JsonUrl:search.utf8DecodedString())
-                            self.suggestedObjects = await  searchResults.suggestion(JsonUrl: search.utf8DecodedString())
-                            let _ = print(SearchGetter.inputFormatter(keywords: keyword).utf8DecodedString())
+                            self.keywordSuggestions = await  searchResults.keyword(JsonUrl:search)
+                            self.suggestedObjects = await  searchResults.suggestion(JsonUrl:search)
                             
                         }
                     })
+                Spacer()
+                    
                 ForEach(keywordSuggestions, id: \.self){ suggestedKeyword in
                     Text(suggestedKeyword.keyword!)
                     
                 }
                 ForEach(suggestedObjects, id: \.self){ suggestion in
-                    Text(suggestion.title!)
+                    SuggestedRow.init(name: suggestion.name!, imageURL: suggestion.thumb!)
+                    let _ = print (suggestion.name!)
+                    let _ = print (suggestion.thumb!)
                 }
             }
+            
         }
     }
 }
