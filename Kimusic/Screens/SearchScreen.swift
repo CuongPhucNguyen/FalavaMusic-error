@@ -40,9 +40,9 @@ struct SearchScreen: View {
                     
                 }
                 ForEach(suggestedObjects, id: \.self){ suggestion in
-                    SuggestedRow.init(name: suggestion.name!, imageURL: suggestion.thumb!)
-                    let _ = print (suggestion.name!)
-                    let _ = print (suggestion.thumb!)
+                    SuggestedRow.init(name: suggestion.title ?? "", imageURL: suggestion.thumb ?? "")
+                    let _ = print (suggestion.title ?? "")
+                    let _ = print (suggestion.thumb ?? "")
                 }
             }
             

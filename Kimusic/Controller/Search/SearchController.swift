@@ -32,13 +32,7 @@ class SearchGetter: ObservableObject{
                         await suggestion(JsonUrl: JsonUrl)
                     }
                 } else{
-                    if (decoded.data!.items![0].suggestions == nil){
-                        var temp = Suggestion.init()
-                        temp.title = "No more results"
-                    }
-                    else {
-                        return decoded.data!.items![0].suggestions!
-                    }
+                    return decoded.data!.items![0].itemSuggestions!
                 }
             
             } catch {
