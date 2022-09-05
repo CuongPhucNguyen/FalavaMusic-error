@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		9008031328BF7154000AB2B8 /* SearchPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008031228BF7154000AB2B8 /* SearchPrediction.swift */; };
 		9008031528BF7186000AB2B8 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008031428BF7186000AB2B8 /* SearchController.swift */; };
+		90D395CB28C6011600720BE7 /* ResizableLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D395CA28C6011600720BE7 /* ResizableLottieView.swift */; };
+		90D395D328C601BB00720BE7 /* Search.json in Resources */ = {isa = PBXBuildFile; fileRef = 90D395CE28C601BB00720BE7 /* Search.json */; };
+		90D395D428C601BB00720BE7 /* Home.json in Resources */ = {isa = PBXBuildFile; fileRef = 90D395CF28C601BB00720BE7 /* Home.json */; };
+		90D395D528C601BB00720BE7 /* 99387-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 90D395D028C601BB00720BE7 /* 99387-loading.json */; };
+		90D395D628C601BB00720BE7 /* Album.json in Resources */ = {isa = PBXBuildFile; fileRef = 90D395D128C601BB00720BE7 /* Album.json */; };
+		90D395D728C601BB00720BE7 /* PodCast.json in Resources */ = {isa = PBXBuildFile; fileRef = 90D395D228C601BB00720BE7 /* PodCast.json */; };
 		C60D3D292897A83A00A3D8C2 /* MusicScroll2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60D3D282897A83A00A3D8C2 /* MusicScroll2.swift */; };
 		C616C33D28943ADB002C37A8 /* CustomRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C33C28943ADB002C37A8 /* CustomRefreshView.swift */; };
 		C61EC7FF28992F8C0076A052 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C61EC7FE28992F8C0076A052 /* Lottie */; };
@@ -39,12 +45,6 @@
 		C6B3C1242891A2AD00221BA4 /* MusicScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C1232891A2AD00221BA4 /* MusicScroll.swift */; };
 		C6B3C1262891A30100221BA4 /* PaperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C1252891A30100221BA4 /* PaperViews.swift */; };
 		C6E36DC52893DDA10098096E /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E36DC42893DDA10098096E /* CustomTabBar.swift */; };
-		E71BE86B28BF42B800C43EA4 /* Home.json in Resources */ = {isa = PBXBuildFile; fileRef = E71BE86628BF42B800C43EA4 /* Home.json */; };
-		E71BE86C28BF42B800C43EA4 /* Album.json in Resources */ = {isa = PBXBuildFile; fileRef = E71BE86728BF42B800C43EA4 /* Album.json */; };
-		E71BE86D28BF42B800C43EA4 /* PodCast.json in Resources */ = {isa = PBXBuildFile; fileRef = E71BE86828BF42B800C43EA4 /* PodCast.json */; };
-		E71BE86E28BF42B800C43EA4 /* 99387-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E71BE86928BF42B800C43EA4 /* 99387-loading.json */; };
-		E71BE86F28BF42B800C43EA4 /* Search.json in Resources */ = {isa = PBXBuildFile; fileRef = E71BE86A28BF42B800C43EA4 /* Search.json */; };
-		E71BE87128BF42CD00C43EA4 /* ResizableLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71BE87028BF42CC00C43EA4 /* ResizableLottieView.swift */; };
 		E71BE87828BF44F800C43EA4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE87728BF44F800C43EA4 /* FirebaseDatabase */; };
 		E71BE87C28BF44F800C43EA4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE87B28BF44F800C43EA4 /* FirebaseFirestore */; };
 		E71BE88428BF44F800C43EA4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE88328BF44F800C43EA4 /* FirebaseStorage */; };
@@ -71,6 +71,12 @@
 /* Begin PBXFileReference section */
 		9008031228BF7154000AB2B8 /* SearchPrediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPrediction.swift; sourceTree = "<group>"; };
 		9008031428BF7186000AB2B8 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		90D395CA28C6011600720BE7 /* ResizableLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableLottieView.swift; sourceTree = "<group>"; };
+		90D395CE28C601BB00720BE7 /* Search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search.json; sourceTree = "<group>"; };
+		90D395CF28C601BB00720BE7 /* Home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Home.json; sourceTree = "<group>"; };
+		90D395D028C601BB00720BE7 /* 99387-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "99387-loading.json"; sourceTree = "<group>"; };
+		90D395D128C601BB00720BE7 /* Album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Album.json; sourceTree = "<group>"; };
+		90D395D228C601BB00720BE7 /* PodCast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PodCast.json; sourceTree = "<group>"; };
 		C60D3D282897A83A00A3D8C2 /* MusicScroll2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicScroll2.swift; sourceTree = "<group>"; };
 		C616C33C28943ADB002C37A8 /* CustomRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshView.swift; sourceTree = "<group>"; };
 		C67AB82B28C0A70200C502E9 /* NowPlayingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingBar.swift; sourceTree = "<group>"; };
@@ -102,12 +108,6 @@
 		C6B3C1232891A2AD00221BA4 /* MusicScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicScroll.swift; sourceTree = "<group>"; };
 		C6B3C1252891A30100221BA4 /* PaperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViews.swift; sourceTree = "<group>"; };
 		C6E36DC42893DDA10098096E /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		E71BE86628BF42B800C43EA4 /* Home.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Home.json; path = "../../../../Downloads/KimusicSwiftUI-main/Kimusic/Assets/Home.json"; sourceTree = "<group>"; };
-		E71BE86728BF42B800C43EA4 /* Album.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Album.json; path = "../../../../Downloads/KimusicSwiftUI-main/Kimusic/Assets/Album.json"; sourceTree = "<group>"; };
-		E71BE86828BF42B800C43EA4 /* PodCast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PodCast.json; path = "../../../../Downloads/KimusicSwiftUI-main/Kimusic/Assets/PodCast.json"; sourceTree = "<group>"; };
-		E71BE86928BF42B800C43EA4 /* 99387-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "99387-loading.json"; path = "../../../../Downloads/KimusicSwiftUI-main/Kimusic/Assets/99387-loading.json"; sourceTree = "<group>"; };
-		E71BE86A28BF42B800C43EA4 /* Search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Search.json; path = "../../../../Downloads/KimusicSwiftUI-main/Kimusic/Assets/Search.json"; sourceTree = "<group>"; };
-		E71BE87028BF42CC00C43EA4 /* ResizableLottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResizableLottieView.swift; path = "../../../../Downloads/KimusicSwiftUI-main/Kimusic/Components/ResizableLottieView.swift"; sourceTree = "<group>"; };
 		E71BE88828BF467D00C43EA4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E71BE88D28BF54DD00C43EA4 /* LoginSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignup.swift; sourceTree = "<group>"; };
 		E71BE88F28BF59F800C43EA4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -142,11 +142,11 @@
 		C616C34128943C37002C37A8 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				E71BE86928BF42B800C43EA4 /* 99387-loading.json */,
-				E71BE86728BF42B800C43EA4 /* Album.json */,
-				E71BE86628BF42B800C43EA4 /* Home.json */,
-				E71BE86828BF42B800C43EA4 /* PodCast.json */,
-				E71BE86A28BF42B800C43EA4 /* Search.json */,
+				90D395D028C601BB00720BE7 /* 99387-loading.json */,
+				90D395D128C601BB00720BE7 /* Album.json */,
+				90D395CF28C601BB00720BE7 /* Home.json */,
+				90D395D228C601BB00720BE7 /* PodCast.json */,
+				90D395CE28C601BB00720BE7 /* Search.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -257,12 +257,12 @@
 		C6B3C11C2891A0ED00221BA4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E71BE87028BF42CC00C43EA4 /* ResizableLottieView.swift */,
 				C6E36DC42893DDA10098096E /* CustomTabBar.swift */,
 				C6B3C1212891A17700221BA4 /* TextComponents.swift */,
 				C6B3C1232891A2AD00221BA4 /* MusicScroll.swift */,
 				C60D3D282897A83A00A3D8C2 /* MusicScroll2.swift */,
 				C67AB82B28C0A70200C502E9 /* NowPlayingBar.swift */,
+				90D395CA28C6011600720BE7 /* ResizableLottieView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -354,13 +354,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6B3C0FE28919B7D00221BA4 /* Preview Assets.xcassets in Resources */,
+				90D395D528C601BB00720BE7 /* 99387-loading.json in Resources */,
+				90D395D728C601BB00720BE7 /* PodCast.json in Resources */,
+				90D395D328C601BB00720BE7 /* Search.json in Resources */,
+				90D395D428C601BB00720BE7 /* Home.json in Resources */,
+				90D395D628C601BB00720BE7 /* Album.json in Resources */,
 				E71BE88928BF467D00C43EA4 /* GoogleService-Info.plist in Resources */,
-				E71BE86E28BF42B800C43EA4 /* 99387-loading.json in Resources */,
 				C6B3C0FB28919B7D00221BA4 /* Assets.xcassets in Resources */,
-				E71BE86B28BF42B800C43EA4 /* Home.json in Resources */,
-				E71BE86F28BF42B800C43EA4 /* Search.json in Resources */,
-				E71BE86D28BF42B800C43EA4 /* PodCast.json in Resources */,
-				E71BE86C28BF42B800C43EA4 /* Album.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +377,7 @@
 				C6B3C1222891A17700221BA4 /* TextComponents.swift in Sources */,
 				C6A6660428990E4000C30F4F /* MusicView.swift in Sources */,
 				C6A2C4702895256900B56717 /* ApiMusic.swift in Sources */,
+				90D395CB28C6011600720BE7 /* ResizableLottieView.swift in Sources */,
 				C699CB6B28C1E1CF00D532F7 /* LastMusicView.swift in Sources */,
 				C6B3C10928919C8100221BA4 /* HomeModel.swift in Sources */,
 				C6AE7B102897C805004AA971 /* ViewModel.swift in Sources */,
@@ -397,7 +398,6 @@
 				C6B3C10628919C6900221BA4 /* ApiHome.swift in Sources */,
 				E71BE89028BF59F800C43EA4 /* User.swift in Sources */,
 				9008031328BF7154000AB2B8 /* SearchPrediction.swift in Sources */,
-				E71BE87128BF42CD00C43EA4 /* ResizableLottieView.swift in Sources */,
 				C6A7E2B72894188300321F8A /* SplashScreen.swift in Sources */,
 				C6B3C10E28919D0300221BA4 /* ZingStruct.swift in Sources */,
 				C6A2C46A2894D51600B56717 /* AlbumScreen.swift in Sources */,
