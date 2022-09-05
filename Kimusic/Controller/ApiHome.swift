@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Combine
-
 
 enum APIError: Error {
     case error(String)
@@ -36,18 +34,13 @@ enum MusicType: String{
 
 class SongListViewModel: ObservableObject{
     let ZingClass = ZingCollectorLink();
-    
-    var cancellables = Set<AnyCancellable>()
-    
     @Published var apiState: APIState = .loading
     
     
     //MARK: - For Data Page 1
     @Published var AlbumNews : [AlbumElement] = []
     @Published var SongNews : [Song] = []
-    
-    
-    
+
     @Published var Chill : [ItemItem] = []
     @Published var WantToListen : [ItemItem] = []
     @Published var Banner : [ItemItem] = []
@@ -87,31 +80,13 @@ class SongListViewModel: ObservableObject{
         let linkPage2 = ZingClass.getHomePage(page: "2")
         
         apiState = .loading
-        
-        Task(priority: .high) {
-            Banner = await decoceZingBanner(JsonUrl: linkPage1)
-            SongNews = await decoceZingSongElement(JsonUrl: linkPage1)
-            WantToListen = await decoceZingWantToListion(JsonUrl: linkPage1)
-            Chill = await decoceZingChill(JsonUrl: linkPage1)
-            
-            Chill = await decoceZingChill(JsonUrl: linkPage1)
-            AlbumNews = await decoceZingAlbumElement(JsonUrl: linkPage1)
-            MixForYou = await decoceZingMixForYou(JsonUrl: linkPage1)
-        }
-        
-        
-        Task(priority: .high) {
-            
-            AlreadyListen = await decoceZingAlreadyListen(JsonUrl: linkPage2)
-            ForFan = await decoceZingForFan(JsonUrl: linkPage2)
-            newDay = await decoceZingNewsDay(JsonUrl: linkPage2)
-            
-        }
+        await decoceZingPage1(JsonUrl: linkPage1)
+        await decoceZingPage2(JsonUrl: linkPage2)
         apiState = .success
     }
     
     //Page 1
-    func decoceZingBanner(JsonUrl: String) async -> [ItemItem] {
+    func decoceZingPage1(JsonUrl: String) async  {
         if let url = URL(string: JsonUrl) {
             cs.setCookies([cookieZmp3_sid, cookieZpsid], for: url, mainDocumentURL: nil)
             let request = URLRequest(url: url)
@@ -120,171 +95,33 @@ class SongListViewModel: ObservableObject{
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                     throw APIError.error("Link Repose Fail")
                 }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data) // ZingHome
+                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
                 
                 if(decoded.err == -201){
                     Task{
-                        await decoceZingBanner(JsonUrl: JsonUrl)
+                        await decoceZingPage1(JsonUrl: JsonUrl)
                     }
                 } else {
-                    return decoded.data!.items![0].items!
+                    Task.detached(priority: .high) {
+                        DispatchQueue.main.async {
+                            self.Banner = decoded.data!.items![0].items!
+                            self.SongNews = decoded.data!.items![4].items![0].song!
+                            self.WantToListen = decoded.data!.items![3].items!
+                            self.Chill = decoded.data!.items![5].items!
+                            self.MixForYou = decoded.data!.items![6].items!
+                            self.AlbumNews = decoded.data!.items![4].items![0].album!
+                        }
+                    }
                 }
                 
             } catch {
                 apiState = .failure(APIError.error(error.localizedDescription))
             }
         }
-        return []
     }
     
-    func decoceZingWantToListion(JsonUrl: String) async -> [ItemItem] {
-        if let url = URL(string: JsonUrl) {
-            cs.setCookies([cookieZmp3_sid, cookieZpsid], for: url, mainDocumentURL: nil)
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingWantToListion(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![3].items!
-                }
-                
-            } catch {
-                apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    
-    func decoceZingChill(JsonUrl: String) async -> [ItemItem] {
-        if let url = URL(string: JsonUrl) {
-            cs.setCookies([cookieZmp3_sid, cookieZpsid], for: url, mainDocumentURL: nil)
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingChill(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![5].items!
-                }
-                
-            } catch {
-                apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    func decoceZingTopicToday(JsonUrl: String) async -> [ItemItem] {
-        if let url = URL(string: JsonUrl) {
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingTopicToday(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![4].items!
-                }
-                
-            } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    func decoceZingMixForYou(JsonUrl: String) async -> [ItemItem] {
-        if let url = URL(string: JsonUrl) {
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingTopicToday(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![6].items!
-                }
-                
-            } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    func decoceZingAlbumElement(JsonUrl: String) async -> [AlbumElement] {
-        if let url = URL(string: JsonUrl) {
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingAlbumElement(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![4].items![0].album!
-                }
-                
-            } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    func decoceZingSongElement(JsonUrl: String) async -> [Song] {
-        if let url = URL(string: JsonUrl) {
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingSongElement(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![4].items![0].song!
-                }
-                
-            } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    func decoceZingAlreadyListen(JsonUrl: String) async -> [ItemItem2] {
+    //Page 2
+    func decoceZingPage2(JsonUrl: String) async {
         if let url = URL(string: JsonUrl) {
             let request = URLRequest(url: url)
             do{
@@ -293,67 +130,24 @@ class SongListViewModel: ObservableObject{
                     throw APIError.error("Link Repose Fail")
                 }
                 let decoded = try JSONDecoder().decode(ZingHome2.self, from: data)
+                
                 if(decoded.err == -201){
                     Task{
-                        await decoceZingAlreadyListen(JsonUrl: JsonUrl)
+                        await decoceZingPage2(JsonUrl: JsonUrl)
                     }
-                } else{
-                    return decoded.data!.items![0].items!
+                } else {
+                    Task.detached(priority: .high) {
+                        DispatchQueue.main.async{
+                            self.AlreadyListen = decoded.data!.items![0].items!
+                            self.ForFan = decoded.data!.items![1].items!
+                            self.newDay = decoded.data!.items![3].items!
+                        }
+                    }
                 }
                 
             } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
+                apiState = .failure(APIError.error(error.localizedDescription))
             }
         }
-        return []
     }
-    
-    func decoceZingForFan(JsonUrl: String) async -> [ItemItem2] {
-        if let url = URL(string: JsonUrl) {
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome2.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingForFan(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![1].items!
-                }
-                
-            } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
-    func decoceZingNewsDay(JsonUrl: String) async -> [ItemItem2] {
-        if let url = URL(string: JsonUrl) {
-            let request = URLRequest(url: url)
-            do{
-                let (data, response) = try await URLSession.shared.data(for: request)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw APIError.error("Link Repose Fail")
-                }
-                let decoded = try JSONDecoder().decode(ZingHome2.self, from: data)
-                if(decoded.err == -201){
-                    Task{
-                        await decoceZingNewsDay(JsonUrl: JsonUrl)
-                    }
-                } else{
-                    return decoded.data!.items![3].items!
-                }
-                
-            } catch {
-                self.apiState = .failure(APIError.error(error.localizedDescription))
-            }
-        }
-        return []
-    }
-    
 }
