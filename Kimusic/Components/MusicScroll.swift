@@ -14,6 +14,7 @@ struct MusicScroll: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12){
+            
             Text(Title)
                 .font(.title3)
                 .fontWeight(.bold)

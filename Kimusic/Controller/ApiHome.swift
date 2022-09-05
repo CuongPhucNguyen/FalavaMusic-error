@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 enum APIError: Error {
@@ -36,12 +37,17 @@ enum MusicType: String{
 class SongListViewModel: ObservableObject{
     let ZingClass = ZingCollectorLink();
     
+    var cancellables = Set<AnyCancellable>()
+    
     @Published var apiState: APIState = .loading
     
     
     //MARK: - For Data Page 1
     @Published var AlbumNews : [AlbumElement] = []
     @Published var SongNews : [Song] = []
+    
+    
+    
     @Published var Chill : [ItemItem] = []
     @Published var WantToListen : [ItemItem] = []
     @Published var Banner : [ItemItem] = []
@@ -49,7 +55,7 @@ class SongListViewModel: ObservableObject{
     
     @Published var MusicPage : MusicType = .Song
     @Published var MusicCheck : Bool = true
-        
+    
     
     //MARK: - For Data Page 2
     
@@ -80,26 +86,27 @@ class SongListViewModel: ObservableObject{
         let linkPage1 = ZingClass.getHomePage(page: "1")
         let linkPage2 = ZingClass.getHomePage(page: "2")
         
-        
-        
-        
-        
-        
         apiState = .loading
         
-        Banner = await decoceZingBanner(JsonUrl: linkPage1)
-        SongNews = await decoceZingSongElement(JsonUrl: linkPage1)
+        Task(priority: .high) {
+            Banner = await decoceZingBanner(JsonUrl: linkPage1)
+            SongNews = await decoceZingSongElement(JsonUrl: linkPage1)
+            WantToListen = await decoceZingWantToListion(JsonUrl: linkPage1)
+            Chill = await decoceZingChill(JsonUrl: linkPage1)
+            
+            Chill = await decoceZingChill(JsonUrl: linkPage1)
+            AlbumNews = await decoceZingAlbumElement(JsonUrl: linkPage1)
+            MixForYou = await decoceZingMixForYou(JsonUrl: linkPage1)
+        }
         
-        WantToListen = await decoceZingWantToListion(JsonUrl: linkPage1)
-        Chill = await decoceZingChill(JsonUrl: linkPage1)
-        AlbumNews = await decoceZingAlbumElement(JsonUrl: linkPage1)
-        MixForYou = await decoceZingMixForYou(JsonUrl: linkPage1)
-
         
-        AlreadyListen = await decoceZingAlreadyListen(JsonUrl: linkPage2)
-        ForFan = await decoceZingForFan(JsonUrl: linkPage2)
-        newDay = await decoceZingNewsDay(JsonUrl: linkPage2)
-        
+        Task(priority: .high) {
+            
+            AlreadyListen = await decoceZingAlreadyListen(JsonUrl: linkPage2)
+            ForFan = await decoceZingForFan(JsonUrl: linkPage2)
+            newDay = await decoceZingNewsDay(JsonUrl: linkPage2)
+            
+        }
         apiState = .success
     }
     
@@ -119,10 +126,10 @@ class SongListViewModel: ObservableObject{
                     Task{
                         await decoceZingBanner(JsonUrl: JsonUrl)
                     }
-                } else{
+                } else {
                     return decoded.data!.items![0].items!
                 }
-            
+                
             } catch {
                 apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -147,7 +154,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![3].items!
                 }
-            
+                
             } catch {
                 apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -173,7 +180,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![5].items!
                 }
-            
+                
             } catch {
                 apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -197,7 +204,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![4].items!
                 }
-            
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -221,7 +228,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![6].items!
                 }
-            
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -245,7 +252,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![4].items![0].album!
                 }
-
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -269,7 +276,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![4].items![0].song!
                 }
-
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -293,7 +300,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![0].items!
                 }
-            
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -317,7 +324,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![1].items!
                 }
-            
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }
@@ -341,7 +348,7 @@ class SongListViewModel: ObservableObject{
                 } else{
                     return decoded.data!.items![3].items!
                 }
-            
+                
             } catch {
                 self.apiState = .failure(APIError.error(error.localizedDescription))
             }

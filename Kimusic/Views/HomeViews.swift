@@ -56,6 +56,9 @@ struct HomeViews: View {
                 MusicScroll2(Title: "Nhạc mới mỗi ngày", DataLeap: viewmodle.newDay)
                 MusicScroll2(Title: "Vì bạn đã nghe", DataLeap: viewmodle.AlreadyListen)
                 MusicScroll2(Title: "Dành cho Fan", DataLeap: viewmodle.ForFan)
+                
+                
+                
             }.onAppear{
                 Task{
                     await viewmodle.executedZing()
