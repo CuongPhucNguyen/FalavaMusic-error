@@ -262,7 +262,7 @@ struct Time: Codable {
 }
 
 // MARK: - ItemItem
-struct ItemItem2: Codable {
+struct ItemItem2: Codable{
     let encodeId, title: String?
     let thumbnail: String?
     let isoffical: Bool?

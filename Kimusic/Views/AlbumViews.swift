@@ -6,7 +6,9 @@
 
 import SwiftUI
 
+
 struct AlbumViews: View {
+    
     //Back Button config
     @Environment(\.presentationMode) var presentationMode: Binding
     
@@ -16,7 +18,7 @@ struct AlbumViews: View {
     @State var show = false
     
     //Data
-    @StateObject var vmtask = AlbumFetchApi()
+    @EnvironmentObject var vmtask : TopLevelController
     
     var body: some View {
         
@@ -29,17 +31,13 @@ struct AlbumViews: View {
                     
                     titleBanner
                     
-                    
                     VStack{
                         ForEach(vmtask.ListMusic) { cors in
-                            NavigationLink(destination: MusicView(idCode: cors.encodeId!,MusicTitle: cors.title!, ArtistName: cors.artistsNames!,
-                                                                    MusicBanner: cors.thumbnailM!)){
+                            NavigationLink(destination: MusicView(idCode: cors.encodeId!,MusicTitle: cors.title!, ArtistName: cors.artistsNames!, MusicBanner: cors.thumbnailM!)){
                                 CardMusic(Song: cors)
                             }.buttonStyle(PlainButtonStyle())
                         }
                     }
-                    
-                    
                     
                     Spacer()
                 }

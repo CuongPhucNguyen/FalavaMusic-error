@@ -6,14 +6,58 @@
 //
 import SwiftUI
 
-class MusicPlayerViewModel: ObservableObject {
-
-    // MiniPlayer Properties...
-    @Published var showPlayer = false
+enum APIError: Error {
+    case error(String)
     
-    // Gesture Offset..
-    @Published var offset: CGFloat = 0
-    @Published var width: CGFloat = UIScreen.main.bounds.width
-    @Published var height : CGFloat = 0
-    @Published var isMiniPlyer = false
+    var localizedDescription: String {
+        switch self {
+        case .error(let message):
+            return message
+        }
+    }
+}
+
+enum APIState {
+    case loading
+    case success
+    case failure(APIError)
+}
+
+
+enum MusicType: String{
+    case Song = "Song"
+    case Album = "Album"
+    case all = "ALL"
+}
+
+struct MusicModel: Equatable, Decodable, Encodable {
+    var idCode : String = ""
+    var MusicTitle : String = ""
+    var MusicBanner: String = ""
+    var ArtistName: String = ""
+    
+    var id = UUID().uuidString
+}
+
+class MusicSessionManager {
+    // MARK:- Properties
+
+    public static var shared = MusicSessionManager()
+    
+    var MusicTabManger: MusicModel {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: "Music") else { return MusicModel() }
+            return (try? JSONDecoder().decode(MusicModel.self, from: data)) ?? MusicModel()
+        }
+        set {
+            guard let data = try? JSONEncoder().encode(newValue) else { return }
+            UserDefaults.standard.set(data, forKey: "Music")
+        }
+    }
+    func refresh() {
+        
+    }
+    
+    // MARK:- Init
+    private init(){}
 }

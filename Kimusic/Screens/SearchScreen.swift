@@ -15,9 +15,7 @@ struct SearchScreen: View {
     @State var search = ""
     @State var keywordSuggestions: [Keyword] = []
     @State var suggestedObjects: [Suggestion] = []
-    
-    
-    
+
     
     var body: some View {
         NavigationView{

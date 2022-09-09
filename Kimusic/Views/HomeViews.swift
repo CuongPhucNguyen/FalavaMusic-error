@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeViews: View {
     
     
-    @StateObject var viewmodle = SongListViewModel()
+    @EnvironmentObject var viewmodle : TopLevelController
     
     
     @Namespace var animation
@@ -27,59 +27,75 @@ struct HomeViews: View {
     ]
     
     var body: some View {
-        CustomRefreshView(lottieFileName: "99387-loading", content: {
-            VStack(spacing: 15){
-                PagerView(pageCount: viewmodle.Banner.count, currentIndex: $currentPage) {
-                    ForEach(viewmodle.Banner, id: \.self.encodeId) { co in
-                        NavigationLink(destination: AlbumViews(idCode: co.encodeId!)){
-                            AsyncImage(url: URL(string: co.banner!)) { image in
-                                image.resizable()
-                            } placeholder: {
-                                ProgressView()
-                            }
-                        }.buttonStyle(PlainButtonStyle())
-                    }
-                }
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .aspectRatio(4/3, contentMode: .fit)
-                
-//                MusicGridSong
-                
-                CustomSegmentedControl()
-                
-
-                
-                MusicScroll(Title: "Nhạc mới hôm nay", DataLeap: viewmodle.WantToListen)
-                MusicScroll(Title: "Chill with you", DataLeap: viewmodle.Chill)
-                MusicScroll(Title: "Mix For You", DataLeap: viewmodle.MixForYou)
-                
-                MusicScroll2(Title: "Nhạc mới mỗi ngày", DataLeap: viewmodle.newDay)
-                MusicScroll2(Title: "Vì bạn đã nghe", DataLeap: viewmodle.AlreadyListen)
-                MusicScroll2(Title: "Dành cho Fan", DataLeap: viewmodle.ForFan)
-                
-                
-                
-            }.onAppear{
-                Task{
-                    await viewmodle.executedZing()
+        ScrollView(.vertical, showsIndicators: false) {
+            PagerView(pageCount: viewmodle.Banner.count, currentIndex: $currentPage) {
+                ForEach(viewmodle.Banner, id: \.self.encodeId) { co in
+                    NavigationLink(destination: AlbumViews(idCode: co.encodeId!)){
+                        AsyncImage(url: URL(string: co.banner!)) { image in
+                            image.resizable()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }.buttonStyle(PlainButtonStyle())
+                    
                 }
             }
-            .padding()
-            .padding(.bottom,100)
-            .navigationBarHidden(true)
-                
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .aspectRatio(4/3, contentMode: .fit)
             
-        }, onRefresh: {
-            try? await Task.sleep(nanoseconds: 3_000_000_000)
-        })
+            CustomSegmentedControl()
+            
+            CustomMusicScroll(titleView: "Nhạc mới hôm nay") {
+                ForEach(viewmodle.WantToListen, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
+                }
+            }
+            
+            CustomMusicScroll(titleView: "Chill with you") {
+                ForEach(viewmodle.Chill, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
+                }
+            }
+            
+            CustomMusicScroll(titleView: "Mix For You") {
+                ForEach(viewmodle.MixForYou, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
+                }
+            }
+            
+            CustomMusicScroll(titleView: "Nhạc mới mỗi ngày") {
+                ForEach(viewmodle.newDay, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
+                }
+            }
+            
+            CustomMusicScroll(titleView: "Vì bạn đã nghe") {
+                ForEach(viewmodle.AlreadyListen, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
+                }
+            }
+            
+            CustomMusicScroll(titleView: "Dành cho Fan") {
+                ForEach(viewmodle.ForFan, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
+                }
+            }
+            
+        }.onAppear{
+            Task{
+                await viewmodle.executedZing()
+            }
+        }
+        .padding(.bottom, 100)   
+        
     }
-
+    
     
     // MARK: Custom Segmented Control
     @ViewBuilder
     func CustomSegmentedControl()->some View {
         HStack(spacing: 0){
-            ForEach([MusicType.Song, MusicType.Album],id: \.rawValue){tab in
+            ForEach([MusicType.Song, MusicType.Album],id: \.rawValue) {tab in
                 Text(tab.rawValue.capitalized)
                     .fontWeight(.semibold)
                     .foregroundColor(viewmodle.MusicPage == tab ? .black : .white)
@@ -105,21 +121,18 @@ struct HomeViews: View {
                         withAnimation{viewmodle.MusicPage = tab}
                     }
             }
-
+            
         }
         .frame(width: UIScreen.screenWidth, height: 300, alignment: .top)
         .overlay {
-            if viewmodle.MusicPage == .Song{
+            if viewmodle.MusicPage == .Song {
                 SongMusic
                     .padding(.top, 50)
                 
             } else {
-                
                 AlbumMusic
                     .padding(.top, 50)
-                    
             }
-            
         }
         .padding(5)
         .background{
@@ -140,59 +153,44 @@ struct HomeViews_Previews: PreviewProvider {
 }
 
 extension HomeViews {
-
+    
+    
+    
+    private func SongItemDisplay(idCode: String, thumbnalM: String, Title: String) -> some View {
+        NavigationLink(destination: AlbumViews(idCode: idCode)) {
+            LazyVStack{
+                AsyncImage(url: URL(string: thumbnalM)) { image in
+                    image.resizable().cornerRadius(10).scaledToFill().clipped().frame(width: 200, height: 200, alignment: .leading)
+                } placeholder: {
+                    ProgressView()
+                }
+                
+                TextComponents(inputText: Title)
+            }
+        }.buttonStyle(PlainButtonStyle())
+    }
     
     private var SongMusic: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                ForEach(viewmodle.SongNews, id: \.self.encodeId) { co in
-                    NavigationLink(destination: AlbumViews(idCode: co.encodeId!)){
-                        LazyVStack{
-                            
-                            AsyncImage(url: URL(string: co.thumbnailM!)) { image in
-                                image.resizable().cornerRadius(10).scaledToFill().clipped().frame(width: 200, height: 200, alignment: .leading)
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            
-                            TextComponents(inputText: co.title!)
-                        }
-                    }.buttonStyle(PlainButtonStyle())
-                    
+                ForEach(viewmodle.SongNews, id: \.self.encodeId) { cosItem in
+                    SongItemDisplay(idCode: cosItem.encodeId!, thumbnalM: cosItem.thumbnailM!, Title: cosItem.title!)
                 }
                 
             }
         }
     }
     
-
+    
     private var AlbumMusic: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
                 ForEach(viewmodle.AlbumNews, id: \.self.encodeId) { co in
-                    NavigationLink(destination: AlbumViews(idCode: co.encodeId!)){
-                        LazyVStack{
-                            
-                            AsyncImage(url: URL(string: co.thumbnailM!)) { image in
-                                image.resizable().cornerRadius(10).scaledToFill().clipped().frame(width: 200, height: 200, alignment: .leading)
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            
-                            TextComponents(inputText: co.title!)
-                        }
-                    }.buttonStyle(PlainButtonStyle())
-                    
+                    SongItemDisplay(idCode: co.encodeId!, thumbnalM: co.thumbnailM!, Title: co.title!)
                 }
                 
             }
         }
     }
-}
-
-
-extension UIScreen{
-    static let screenWidth = UIScreen.main.bounds.size.width
-    static let screenHeight = UIScreen.main.bounds.size.height
-    static let screenSize = UIScreen.main.bounds.size
+    
 }
