@@ -10,8 +10,6 @@
 	<dict>
 		<key>UIColorName</key>
 		<string>BackGround</string>
-		<key>UILaunchScreen</key>
-		<dict/>
 	</dict>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDarkContent</string>

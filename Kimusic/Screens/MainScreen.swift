@@ -57,15 +57,10 @@ struct MainScreen: View {
     
     var body: some View {
         ZStack {
-            GeometryReader{proxy in
-                
-                let frame = proxy.frame(in: .global)
-                
                 TabView(selection: $currentTab) {
                     
                     NavigationView {
                         HomeViews()
-                            .navigationViewStyle(.stack)
                             .navigationBarHidden(true)
                     }
                     .setBG()
@@ -89,12 +84,8 @@ struct MainScreen: View {
                     .applyBG()
                     .tag(Tab.album)
                     
-                }.frame(width: frame.width, height: frame.height)
-            }
-            .ignoresSafeArea()
-            
-            
-            
+                }
+ 
             
             ReactTabMusicBar()
             
@@ -152,6 +143,11 @@ struct MainScreen: View {
                         Small_Bar_Music
                     } else{
                         TabViewMusic
+                            .onAppear{
+                                Task{
+                                    await MusicController.decodeLyrick(idMusic: MusicController.MusicTabBar?.idCode ?? BackMusic.idCode)
+                                }
+                            }
                     }
                     
                 }
@@ -255,11 +251,19 @@ extension MainScreen {
     
     private var Play_Button_Bar : some View {
         VStack{
-            Slider(value: Binding(get: {time}, set: { (newValue) in
-                time = newValue
-                // updating player...
-                MusicController.updateSilder(newTime: Double(time))
-            })).padding()
+            HStack{
+                Text("\(MusicController.getCurrentTime(value: MusicController.audioPlayer!.currentTime))")
+                
+                Slider(value: Binding(get: {time}, set: { (newValue) in
+                    time = newValue
+                    // updating player...
+                    MusicController.updateSilder(newTime: Double(time))
+                })).padding()
+                
+                Text("\(MusicController.getCurrentTime(value: MusicController.audioPlayer!.duration))")
+                
+            }
+            .padding(.bottom, 50)
             
             Button(action: MusicController.play) {
                 Image(systemName: MusicController.CheckingPlay ? "pause.fill" : "play.fill")
@@ -269,7 +273,7 @@ extension MainScreen {
                     .clipShape(Circle())
             }
         }
-        .padding(.bottom, 50)
+
     }
     
     
@@ -303,16 +307,28 @@ extension MainScreen {
             Spacer()
             Disco
             
-            Text(MusicController.MusicTabBar?.MusicTitle ?? BackMusic.MusicTitle)
-                .font(.callout)
-                .bold()
+            
+            VStack{
+                Text(MusicController.MusicTabBar?.MusicTitle ?? BackMusic.MusicTitle)
+                    .font(.callout)
+                    .bold()
+                
+            
+                
+ 
+                    
+                    
+                    
+       
+                Play_Button_Bar
+            }.padding(.top, 46).frame(alignment: .bottomTrailing)
+            
+            Spacer(minLength: 0)
             
             Spacer()
-            
-            Play_Button_Bar
-            
-            Spacer()
-        }.onReceive(timer) { (_) in
+        }
+        .padding(.vertical, 22)
+        .onReceive(timer) { (_) in
             if MusicController.CheckingPlay {
                 
                 MusicController.audioPlayer!.updateMeters()
@@ -334,11 +350,12 @@ extension MainScreen {
         TabView {
             MainMusicView
             
-            Color.blue
+            MusicLyrickCpm(MusicDataLyrick: MusicController.LyrickMusic)
+                .environmentObject(MusicController)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))  // <--- here
     }
-    
+
     
     
     

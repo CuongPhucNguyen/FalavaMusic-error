@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		657F81C028CC645D0033BF13 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 657F81BF28CC645D0033BF13 /* Lottie */; };
+		657F81C228CC64750033BF13 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 657F81C128CC64750033BF13 /* FirebaseAuth */; };
+		657F81C428CC657B0033BF13 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 657F81C328CC657B0033BF13 /* FirebaseFirestore */; };
+		657F81C628CC65870033BF13 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 657F81C528CC65870033BF13 /* FirebaseDatabase */; };
+		657F81C828CC65930033BF13 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 657F81C728CC65930033BF13 /* FirebaseFirestoreSwift */; };
+		657F81CA28CC659C0033BF13 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 657F81C928CC659C0033BF13 /* FirebaseStorage */; };
+		657F81CC28CC6D6F0033BF13 /* LyrickModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F81CB28CC6D6F0033BF13 /* LyrickModel.swift */; };
+		657F81CE28CC708B0033BF13 /* MusicLyrickCpm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F81CD28CC708B0033BF13 /* MusicLyrickCpm.swift */; };
 		9008031328BF7154000AB2B8 /* SearchPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008031228BF7154000AB2B8 /* SearchPrediction.swift */; };
 		9008031528BF7186000AB2B8 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9008031428BF7186000AB2B8 /* SearchController.swift */; };
 		90098CCD28C615370085CD04 /* SuggestedRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90098CCC28C615370085CD04 /* SuggestedRow.swift */; };
-		C61EC7FF28992F8C0076A052 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C61EC7FE28992F8C0076A052 /* Lottie */; };
 		C66A6E6428C797D50088FD85 /* CustomMusicScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66A6E6328C797D50088FD85 /* CustomMusicScroll.swift */; };
 		C6A026EF2893A50B00992E6E /* AlbumViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A026EE2893A50B00992E6E /* AlbumViews.swift */; };
 		C6A026F12893A58700992E6E /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A026F02893A58700992E6E /* AlbumModel.swift */; };
@@ -37,15 +44,10 @@
 		C6B3C11528919EF500221BA4 /* HomeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C11428919EF500221BA4 /* HomeViews.swift */; };
 		C6B3C1222891A17700221BA4 /* TextComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C1212891A17700221BA4 /* TextComponents.swift */; };
 		C6B3C1262891A30100221BA4 /* PaperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B3C1252891A30100221BA4 /* PaperViews.swift */; };
-		E71BE87828BF44F800C43EA4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE87728BF44F800C43EA4 /* FirebaseDatabase */; };
-		E71BE87C28BF44F800C43EA4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE87B28BF44F800C43EA4 /* FirebaseFirestore */; };
-		E71BE88428BF44F800C43EA4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE88328BF44F800C43EA4 /* FirebaseStorage */; };
 		E71BE88928BF467D00C43EA4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E71BE88828BF467D00C43EA4 /* GoogleService-Info.plist */; };
-		E71BE88C28BF4ACA00C43EA4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E71BE88B28BF4ACA00C43EA4 /* FirebaseAuth */; };
 		E71BE88E28BF54DD00C43EA4 /* LoginSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71BE88D28BF54DD00C43EA4 /* LoginSignup.swift */; };
 		E71BE89028BF59F800C43EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71BE88F28BF59F800C43EA4 /* User.swift */; };
 		E71BE89228BF63C100C43EA4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71BE89128BF63C100C43EA4 /* LoginView.swift */; };
-		E7B9B09928C611C400E2AC85 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9B09828C611C400E2AC85 /* FirebaseFirestoreSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		657F81CB28CC6D6F0033BF13 /* LyrickModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyrickModel.swift; sourceTree = "<group>"; };
+		657F81CD28CC708B0033BF13 /* MusicLyrickCpm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLyrickCpm.swift; sourceTree = "<group>"; };
 		9008031228BF7154000AB2B8 /* SearchPrediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPrediction.swift; sourceTree = "<group>"; };
 		9008031428BF7186000AB2B8 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		90098CCC28C615370085CD04 /* SuggestedRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedRow.swift; sourceTree = "<group>"; };
@@ -104,12 +108,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C61EC7FF28992F8C0076A052 /* Lottie in Frameworks */,
-				E71BE88428BF44F800C43EA4 /* FirebaseStorage in Frameworks */,
-				E71BE87828BF44F800C43EA4 /* FirebaseDatabase in Frameworks */,
-				E71BE87C28BF44F800C43EA4 /* FirebaseFirestore in Frameworks */,
-				E71BE88C28BF4ACA00C43EA4 /* FirebaseAuth in Frameworks */,
-				E7B9B09928C611C400E2AC85 /* FirebaseFirestoreSwift in Frameworks */,
+				657F81C828CC65930033BF13 /* FirebaseFirestoreSwift in Frameworks */,
+				657F81C028CC645D0033BF13 /* Lottie in Frameworks */,
+				657F81C228CC64750033BF13 /* FirebaseAuth in Frameworks */,
+				657F81C628CC65870033BF13 /* FirebaseDatabase in Frameworks */,
+				657F81C428CC657B0033BF13 /* FirebaseFirestore in Frameworks */,
+				657F81CA28CC659C0033BF13 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,8 +170,8 @@
 			children = (
 				C6B323B628C9D1E70060F289 /* Animation */,
 				E71BE88828BF467D00C43EA4 /* GoogleService-Info.plist */,
-				E71BE88728BF451E00C43EA4 /* Firestore */,
 				C6B3C11C2891A0ED00221BA4 /* Components */,
+				E71BE88728BF451E00C43EA4 /* Firestore */,
 				C6B3C11328919EE400221BA4 /* Screens */,
 				C6B3C11228919E6F00221BA4 /* Info.plist */,
 				C6B3C10F28919D8000221BA4 /* Views */,
@@ -205,6 +209,7 @@
 				C6A026F02893A58700992E6E /* AlbumModel.swift */,
 				C6A2C4712895315C00B56717 /* ListenModel.swift */,
 				C6AE7B0F2897C805004AA971 /* ViewModel.swift */,
+				657F81CB28CC6D6F0033BF13 /* LyrickModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				C6B3C1212891A17700221BA4 /* TextComponents.swift */,
 				C66A6E6328C797D50088FD85 /* CustomMusicScroll.swift */,
 				C6B323B428C9D1CC0060F289 /* ResizableLottieView.swift */,
+				657F81CD28CC708B0033BF13 /* MusicLyrickCpm.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -287,12 +293,12 @@
 			);
 			name = Kimusic;
 			packageProductDependencies = (
-				C61EC7FE28992F8C0076A052 /* Lottie */,
-				E71BE87728BF44F800C43EA4 /* FirebaseDatabase */,
-				E71BE87B28BF44F800C43EA4 /* FirebaseFirestore */,
-				E71BE88328BF44F800C43EA4 /* FirebaseStorage */,
-				E71BE88B28BF4ACA00C43EA4 /* FirebaseAuth */,
-				E7B9B09828C611C400E2AC85 /* FirebaseFirestoreSwift */,
+				657F81BF28CC645D0033BF13 /* Lottie */,
+				657F81C128CC64750033BF13 /* FirebaseAuth */,
+				657F81C328CC657B0033BF13 /* FirebaseFirestore */,
+				657F81C528CC65870033BF13 /* FirebaseDatabase */,
+				657F81C728CC65930033BF13 /* FirebaseFirestoreSwift */,
+				657F81C928CC659C0033BF13 /* FirebaseStorage */,
 			);
 			productName = Kimusic;
 			productReference = C6B3C0F328919B7900221BA4 /* Kimusic.app */;
@@ -325,6 +331,8 @@
 			packageReferences = (
 				C61EC7FD28992F8C0076A052 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				657F81BD28CC626D0033BF13 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				657F81BE28CC62940033BF13 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = C6B3C0F428919B7900221BA4 /* Products */;
 			projectDirPath = "";
@@ -366,6 +374,8 @@
 				C6A2C46C2895225E00B56717 /* PodCastScreen.swift in Sources */,
 				C6B3C11528919EF500221BA4 /* HomeViews.swift in Sources */,
 				C6A026F12893A58700992E6E /* AlbumModel.swift in Sources */,
+				657F81CC28CC6D6F0033BF13 /* LyrickModel.swift in Sources */,
+				657F81CE28CC708B0033BF13 /* MusicLyrickCpm.swift in Sources */,
 				C6B3C11128919D9100221BA4 /* MainScreen.swift in Sources */,
 				90098CCD28C615370085CD04 /* SuggestedRow.swift in Sources */,
 				C6A2C4682894D50800B56717 /* SearchScreen.swift in Sources */,
@@ -512,12 +522,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kimusic/Preview Content\"";
-				DEVELOPMENT_TEAM = QMXJ28BTPR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kimusic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -545,12 +556,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kimusic/Preview Content\"";
-				DEVELOPMENT_TEAM = QMXJ28BTPR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kimusic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -593,6 +605,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		657F81BD28CC626D0033BF13 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		657F81BE28CC62940033BF13 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		C61EC7FD28992F8C0076A052 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -612,35 +640,35 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C61EC7FE28992F8C0076A052 /* Lottie */ = {
+		657F81BF28CC645D0033BF13 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C61EC7FD28992F8C0076A052 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
-		E71BE87728BF44F800C43EA4 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		E71BE87B28BF44F800C43EA4 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		E71BE88328BF44F800C43EA4 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
-		E71BE88B28BF4ACA00C43EA4 /* FirebaseAuth */ = {
+		657F81C128CC64750033BF13 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		E7B9B09828C611C400E2AC85 /* FirebaseFirestoreSwift */ = {
+		657F81C328CC657B0033BF13 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		657F81C528CC65870033BF13 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		657F81C728CC65930033BF13 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		657F81C928CC659C0033BF13 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E71BE87228BF44F800C43EA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

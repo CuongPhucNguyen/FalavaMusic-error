@@ -21,12 +21,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct KimusicApp: App {
+    
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var views = TopLevelController()
+    
     var body: some Scene {
         WindowGroup {
             MainScreen()
                 .environmentObject(views)
+                .environment(\.colorScheme, .dark)
         }
     }
 }

@@ -23,6 +23,8 @@ struct ZingStruct{
     let PlayList : String = "/api/v2/page/get/playlist"
     
     let Listen: String = "/api/v2/song/get/streaming"
+    
+    let lyrick : String = "/api/v2/lyric/get/lyric"
 }
 
 class ZingCollectorLink {
@@ -59,6 +61,16 @@ class ZingCollectorLink {
         
         let Sig : String = zingClass.getFinalHash(hashValue: Hash, Slug: ZingStruct().Listen, Key: ZingStruct().secret)
         let FinalLink = ZingStruct().domain+ZingStruct().Listen+"?id=\(id)&ctime=\(timestamp)&version=\(ZingStruct().zingVersion)&sig=\(Sig)&apiKey=\(ZingStruct().ApiKey)"
+        return FinalLink
+    }
+    
+    func getLyrick(idMusic: String) -> String {
+        let timestamp : String = String(Date().currentTimeMillis())
+        
+        let Hash : String = "ctime=\(timestamp)id=\(idMusic)version=\(ZingStruct().zingVersion)"
+        
+        let Sig : String = zingClass.getFinalHash(hashValue: Hash, Slug: ZingStruct().lyrick, Key: ZingStruct().secret)
+        let FinalLink = ZingStruct().domain+ZingStruct().lyrick+"?id=\(idMusic)&ctime=\(timestamp)&version=\(ZingStruct().zingVersion)&sig=\(Sig)&apiKey=\(ZingStruct().ApiKey)"
         return FinalLink
     }
 }

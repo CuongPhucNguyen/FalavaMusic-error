@@ -213,6 +213,9 @@ final class TopLevelController: ObservableObject{
     @Published var audioPlayer: AVAudioPlayer?
     @Published var audioTime : Double = 0
     
+    @Published var TimeLyric : Int  = 0
+    
+    
     
     @Published private(set) var MusicTabBar: MusicModel?
     
@@ -341,6 +344,9 @@ final class TopLevelController: ObservableObject{
     }
     
     
+    
+    
+    
     //MARK: Controll time
     func updateTimer() {
         let currentTime = audioPlayer!.currentTime
@@ -370,7 +376,7 @@ final class TopLevelController: ObservableObject{
     }
     
     //MARK: Get Current Time
-    func getCurrentTime(value: TimeInterval)->String{
+    func getCurrentTime(value: TimeInterval)->String {
         return "\(Int(value / 60)):\(Int(value.truncatingRemainder(dividingBy: 60)) < 9 ? "0" : "")\(Int(value.truncatingRemainder(dividingBy: 60)))"
     }
     
@@ -472,4 +478,41 @@ final class TopLevelController: ObservableObject{
     
     
     
+    
+    //MARK: Show Lyrick Link
+    
+    
+    
+    @Published var LyrickMusic : [Sentence] = []
+    
+    
+    func decodeLyrick(idMusic : String) async {
+        let linkRick = ZingClass.getLyrick(idMusic: idMusic)
+        
+        print(linkRick)
+        guard let url = URL(string: linkRick) else { return }
+        
+        
+        URLSession.shared.dataTaskPublisher(for: url) //1
+            .subscribe(on: DispatchQueue.global(qos: .background)) //2
+            .receive(on: DispatchQueue.main) //3
+            .tryMap { (data, response) -> Data in //4
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: LyrickModel.self, decoder: JSONDecoder()) //5
+            .sink { (completion) in //7
+                print("completion lyrick: \(completion)")
+            } receiveValue: { decoded in
+                Task.detached(priority: .high) {
+                    DispatchQueue.main.async {
+                        self.LyrickMusic  = decoded.data!.sentences!
+                    }
+                }
+                
+            }
+            .store(in: &cancellables) //8
+    }
 }
