@@ -122,6 +122,7 @@ struct MainScreen: View {
         withAnimation(.linear(duration: 0.01)) {
             animatedValue = animated + 55
         }
+        
     }
     
     
