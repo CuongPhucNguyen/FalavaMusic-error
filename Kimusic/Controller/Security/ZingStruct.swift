@@ -25,6 +25,8 @@ struct ZingStruct{
     let Listen: String = "/api/v2/song/get/streaming"
     
     let lyrick : String = "/api/v2/lyric/get/lyric"
+    
+    let SearchResults : String = "/api/v2/search/multi"
 }
 
 class ZingCollectorLink {
@@ -71,6 +73,15 @@ class ZingCollectorLink {
         
         let Sig : String = zingClass.getFinalHash(hashValue: Hash, Slug: ZingStruct().lyrick, Key: ZingStruct().secret)
         let FinalLink = ZingStruct().domain+ZingStruct().lyrick+"?id=\(idMusic)&ctime=\(timestamp)&version=\(ZingStruct().zingVersion)&sig=\(Sig)&apiKey=\(ZingStruct().ApiKey)"
+        return FinalLink
+    }
+    func getSearchResults(searchValue: String) -> String {
+        let timestamp : String = String(Date().currentTimeMillis())
+        
+        let Hash : String = "ctime=\(timestamp)version=\(ZingStruct().zingVersion)"
+        
+        let Sig : String = zingClass.getFinalHash(hashValue: Hash, Slug: ZingStruct().SearchResults, Key: ZingStruct().secret)
+        let FinalLink = ZingStruct().domain+ZingStruct().SearchResults+"?q=\(searchValue)&ctime=\(timestamp)&version=\(ZingStruct().zingVersion)&sig=\(Sig)&apiKey=\(ZingStruct().ApiKey)"
         return FinalLink
     }
 }

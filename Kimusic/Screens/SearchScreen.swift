@@ -15,35 +15,62 @@ struct SearchScreen: View {
     @State var search = ""
     @State var keywordSuggestions: [Keyword] = []
     @State var suggestedObjects: [Suggestion] = []
+    @State var bgDisplay = false
 
     
     var body: some View {
-        NavigationView{
+        ZStack{
+            Color.black.edgesIgnoringSafeArea(.all)
             VStack{
-                TextField("Enter your searching keyword", text: $keyword)
-                    .onChange(of: keyword, perform: { value in
-                        Task{
-                            search = ""
-                            search.append(url)
-                            search.append(SearchGetter.inputFormatter(keywords: keyword))
-                            self.keywordSuggestions = await  searchResults.keyword(JsonUrl:search)
-                            self.suggestedObjects = await  searchResults.suggestion(JsonUrl:search)
-                            
-                        }
-                    })
                 Spacer()
-                    
-                ForEach(keywordSuggestions, id: \.self){ suggestedKeyword in
-                    Text(suggestedKeyword.keyword!)
-                    
+                    .frame(height: UIScreen.main.bounds.height * 1.3/100)
+                ZStack{
+                    RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
+                        .foregroundColor(.gray)
+                        .frame(width: UIScreen.main.bounds.width - 15, height: 50)
+                    TextField("Enter your searching keyword", text: $keyword)
+                        .onChange(of: keyword, perform: { value in
+                            Task{
+                                search = ""
+                                search.append(url)
+                                search.append(SearchGetter.inputFormatter(keywords: keyword))
+                                self.keywordSuggestions.removeAll()
+                                self.suggestedObjects.removeAll()
+                                self.keywordSuggestions = await  searchResults.keyword(JsonUrl:search)
+                                self.suggestedObjects = await  searchResults.suggestion(JsonUrl:search)
+
+                            }
+                        })
+                        .onSubmit{
+                            Task{
+                                await searchResults.searchResults(searchId:SearchGetter.inputFormatter(keywords:"take me home"))
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width - 20, height: 50)
                 }
-                ForEach(suggestedObjects, id: \.self){ suggestion in
-                    SuggestedRow.init(name: suggestion.title ?? "", imageURL: suggestion.thumb ?? "")
-                    let _ = print (suggestion.title ?? "")
-                    let _ = print (suggestion.thumb ?? "")
+    //                .offset(x:0, y: -50)
+                ScrollView{
+                    VStack{
+                        
+                            
+                        ForEach(keywordSuggestions, id: \.self){ suggestedKeyword in
+                            Text(suggestedKeyword.keyword!)
+                                .foregroundColor(.white)
+
+                        }
+                        ForEach(suggestedObjects, id: \.self){ suggestion in
+                            if (suggestion.title != nil){
+                                SuggestedRow.init(name: suggestion.title ?? "", imageURL: suggestion.thumb ?? "", duration: suggestion.duration ?? 0)
+//                                let _ = print (suggestion.title ?? "")
+//                                let _ = print (suggestion.thumb ?? "")
+                            }
+                        }
+                        Spacer()
+                    }
+                    
                 }
             }
-            
         }
     }
 }
