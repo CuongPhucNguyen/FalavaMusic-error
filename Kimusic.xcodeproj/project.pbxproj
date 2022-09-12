@@ -19,8 +19,8 @@
 		9061EBF428CDE0FF00F16C45 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061EBF328CDE0FF00F16C45 /* SearchModel.swift */; };
 		9061EBF628CDE14600F16C45 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061EBF528CDE14600F16C45 /* SearchController.swift */; };
 		9061EBFC28CDF15300F16C45 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9061EBFB28CDF15300F16C45 /* SearchResults.swift */; };
+		90D3549928CF31FF00EEDDD0 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D3549828CF31FF00EEDDD0 /* SearchResultView.swift */; };
 		90E808B028CF065E00677E83 /* ScrollSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E808AF28CF065E00677E83 /* ScrollSearch.swift */; };
-		90E808B228CF103200677E83 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E808B128CF103200677E83 /* SearchResultView.swift */; };
 		90E808B428CF163E00677E83 /* TopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E808B328CF163E00677E83 /* TopResult.swift */; };
 		C66A6E6428C797D50088FD85 /* CustomMusicScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66A6E6328C797D50088FD85 /* CustomMusicScroll.swift */; };
 		C6A026EF2893A50B00992E6E /* AlbumViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A026EE2893A50B00992E6E /* AlbumViews.swift */; };
@@ -74,8 +74,8 @@
 		9061EBF328CDE0FF00F16C45 /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		9061EBF528CDE14600F16C45 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchController.swift; path = ../../Screens/SearchScreenComponents/SearchController.swift; sourceTree = "<group>"; };
 		9061EBFB28CDF15300F16C45 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		90D3549828CF31FF00EEDDD0 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		90E808AF28CF065E00677E83 /* ScrollSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSearch.swift; sourceTree = "<group>"; };
-		90E808B128CF103200677E83 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		90E808B328CF163E00677E83 /* TopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopResult.swift; sourceTree = "<group>"; };
 		C66A6E6328C797D50088FD85 /* CustomMusicScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMusicScroll.swift; sourceTree = "<group>"; };
 		C6A026EE2893A50B00992E6E /* AlbumViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViews.swift; sourceTree = "<group>"; };
@@ -141,8 +141,8 @@
 			children = (
 				90098CCC28C615370085CD04 /* SuggestedRow.swift */,
 				90E808AF28CF065E00677E83 /* ScrollSearch.swift */,
-				90E808B128CF103200677E83 /* SearchResultView.swift */,
 				90E808B328CF163E00677E83 /* TopResult.swift */,
+				90D3549828CF31FF00EEDDD0 /* SearchResultView.swift */,
 			);
 			path = SearchScreenComponents;
 			sourceTree = "<group>";
@@ -386,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E71BE88E28BF54DD00C43EA4 /* LoginSignup.swift in Sources */,
+				90D3549928CF31FF00EEDDD0 /* SearchResultView.swift in Sources */,
 				E71BE89228BF63C100C43EA4 /* LoginView.swift in Sources */,
 				C6B3C1222891A17700221BA4 /* TextComponents.swift in Sources */,
 				9061EBF628CDE14600F16C45 /* SearchController.swift in Sources */,
@@ -411,7 +412,6 @@
 				90E808B028CF065E00677E83 /* ScrollSearch.swift in Sources */,
 				E71BE89028BF59F800C43EA4 /* User.swift in Sources */,
 				C6A7E2B72894188300321F8A /* SplashScreen.swift in Sources */,
-				90E808B228CF103200677E83 /* SearchResultView.swift in Sources */,
 				C6B3C10E28919D0300221BA4 /* ZingStruct.swift in Sources */,
 				C6A2C46A2894D51600B56717 /* AlbumScreen.swift in Sources */,
 				C6B3C0F728919B7900221BA4 /* KimusicApp.swift in Sources */,
