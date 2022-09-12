@@ -17,6 +17,7 @@ struct SearchScreen: View {
     @State var suggestedObjects: [Suggestion] = []
     @State var bgDisplay = false
     @State var results = SearchResultsModel.init()
+    @State var hidden = false
 
     
     var body: some View {
@@ -32,6 +33,7 @@ struct SearchScreen: View {
                     TextField("Enter your searching keyword", text: $keyword)
                         .onChange(of: keyword, perform: { value in
                             Task{
+                                hidden = false
                                 search = ""
                                 search.append(url)
                                 search.append(SearchGetter.inputFormatter(keywords: keyword))
@@ -44,35 +46,17 @@ struct SearchScreen: View {
                         })
                         .onSubmit{
                             Task{
+                                hidden  = true
                                 await searchResults.searchResults(searchId:SearchGetter.inputFormatter(keywords: keyword))
                                 await results = searchResults.getTopResult(keywordInput: keyword)
-                                print(results.data?.TopResult ?? "")
+                                print(results.data!.top!)
                             }
                         }
                         .foregroundColor(.white)
                         .frame(width: UIScreen.main.bounds.width - 20, height: 50)
                 }
-    //                .offset(x:0, y: -50)
-                ScrollView{
-                    VStack{
-                        
-                            
-                        ForEach(keywordSuggestions, id: \.self){ suggestedKeyword in
-                            Text(suggestedKeyword.keyword!)
-                                .foregroundColor(.white)
-
-                        }
-                        ForEach(suggestedObjects, id: \.self){ suggestion in
-                            if (suggestion.title != nil){
-                                SuggestedRow.init(name: suggestion.title ?? "", imageURL: suggestion.thumb ?? "", duration: suggestion.duration ?? 0)
-//                                let _ = print (suggestion.title ?? "")
-//                                let _ = print (suggestion.thumb ?? "")
-                            }
-                        }
-                        Spacer()
-                    }
-                    
-                }
+                ScrollSearch(keyword: $keywordSuggestions, suggestion: $suggestedObjects, hidden: $hidden)
+                
             }
         }
     }

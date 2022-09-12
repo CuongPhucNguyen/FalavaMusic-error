@@ -15,10 +15,10 @@ struct SearchResultsModel: Codable, Hashable {
 
 // MARK: - DataClassResult
 struct DataClassResult: Codable, Hashable {
-    var TopResult: TopResult?
+    var top: TopResult?
     var artists: [DataArtist]?
-    var SongResults: [SongResult]?
-    var VideoResults: [VideoResult]?
+    var songs: [SongResult]?
+    var videos: [VideoResult]?
     var playlists: [Playlist]?
     var counter: Counter?
     var sectionID: String?
@@ -37,7 +37,7 @@ struct DataArtist: Codable, Hashable {
 
 // MARK: - Counter
 struct Counter: Codable, Hashable {
-    var SongResult, artist, playlist, VideoResult: Int?
+    var song, artist, playlist, video: Int?
 }
 
 // MARK: - Playlist
@@ -56,7 +56,7 @@ struct Playlist: Codable, Hashable {
     var thumbnailM: String?
     var isShuffle, isPrivate: Bool?
     var userName: String?
-    var isAlbumResult: Bool?
+    var isAlbum: Bool?
     var textType: String?
     var isSingle, isOwner, canEdit, canDelete: Bool?
 }
@@ -77,7 +77,7 @@ struct SongResult: Codable, Hashable {
     var zingChoice, isPrivate, preRelease: Bool?
     var releaseDate: Int?
     var genreIDS: [String]?
-    var AlbumResult: AlbumResult?
+    var album: AlbumResult?
     var indicators: [String?]?
     var radioID: Int?
     var isIndie: Bool?
@@ -112,7 +112,7 @@ struct SongArtistResult: Codable, Hashable {
 
 // MARK: - TopResult
 struct TopResult: Codable, Hashable {
-    var encodeID, title, alias: String?
+    var encodedID, title, alias: String?
     var isOffical: Bool?
     var username, artistsNames: String?
     var artists: [TopResultArtist]?
@@ -130,6 +130,10 @@ struct TopResult: Codable, Hashable {
     var streamingStatus: Int?
     var allowAudioAds, hasLyric: Bool?
     var objectType: String?
+    var id, name: String?
+    var spotlight: Bool?
+    var playlistID: String?
+    var cover: String?
 }
 
 // MARK: - TopResultArtist
