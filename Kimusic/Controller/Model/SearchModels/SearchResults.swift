@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - SearchResultsModel
-struct SearchResultsModel: Hashable {
+struct SearchResultsModel: Codable, Hashable {
     var err: Int?
     var msg: String?
     var data: DataClassResult?
@@ -14,7 +14,7 @@ struct SearchResultsModel: Hashable {
 }
 
 // MARK: - DataClassResult
-struct DataClassResult: Hashable {
+struct DataClassResult: Codable, Hashable {
     var TopResult: TopResult?
     var artists: [DataArtist]?
     var SongResults: [SongResult]?
@@ -25,7 +25,7 @@ struct DataClassResult: Hashable {
 }
 
 // MARK: - DataArtist
-struct DataArtist: Hashable {
+struct DataArtist: Codable, Hashable {
     var id, name, link: String?
     var spotlight: Bool?
     var alias: String?
@@ -36,12 +36,12 @@ struct DataArtist: Hashable {
 }
 
 // MARK: - Counter
-struct Counter: Hashable {
+struct Counter: Codable, Hashable {
     var SongResult, artist, playlist, VideoResult: Int?
 }
 
 // MARK: - Playlist
-struct Playlist: Hashable {
+struct Playlist: Codable, Hashable {
     var encodeID, title: String?
     var thumbnail: String?
     var isoffical: Bool?
@@ -62,15 +62,13 @@ struct Playlist: Hashable {
 }
 
 // MARK: - SongResult
-struct SongResult: Hashable {
-    static func == (lhs: SongResult, rhs: SongResult) -> Bool {
-        
-    }
+struct SongResult: Codable, Hashable {
+    
     
     var encodeID, title, alias: String?
     var isOffical: Bool?
     var username, artistsNames: String?
-    var artists: [SongResultArtistResult]?
+    var artists: [SongArtistResult]?
     var isWorldWide: Bool?
     var thumbnailM: String?
     var link: String?
@@ -80,7 +78,7 @@ struct SongResult: Hashable {
     var releaseDate: Int?
     var genreIDS: [String]?
     var AlbumResult: AlbumResult?
-    var indicators: [Any?]?
+    var indicators: [String?]?
     var radioID: Int?
     var isIndie: Bool?
     var streamingStatus: Int?
@@ -89,7 +87,7 @@ struct SongResult: Hashable {
 }
 
 // MARK: - AlbumResult
-struct AlbumResult: Hashable {
+struct AlbumResult: Codable, Hashable {
     var encodeID, title: String?
     var thumbnail: String?
     var isoffical: Bool?
@@ -102,8 +100,8 @@ struct AlbumResult: Hashable {
     var artistsNames: String?
 }
 
-// MARK: - SongResultArtistResult
-struct SongResultArtistResult: Hashable {
+// MARK: - SongArtistResult
+struct SongArtistResult: Codable, Hashable {
     var id, name, link: String?
     var spotlight: Bool?
     var alias: String?
@@ -113,7 +111,7 @@ struct SongResultArtistResult: Hashable {
 }
 
 // MARK: - TopResult
-struct TopResult: Hashable {
+struct TopResult: Codable, Hashable {
     var encodeID, title, alias: String?
     var isOffical: Bool?
     var username, artistsNames: String?
@@ -126,7 +124,7 @@ struct TopResult: Hashable {
     var zingChoice, isPrivate, preRelease: Bool?
     var releaseDate: Int?
     var genreIDS: [String]?
-    var indicators: [Any?]?
+    var indicators: [String?]?
     var radioID: Int?
     var isIndie: Bool?
     var streamingStatus: Int?
@@ -135,7 +133,7 @@ struct TopResult: Hashable {
 }
 
 // MARK: - TopResultArtist
-struct TopResultArtist: Hashable {
+struct TopResultArtist: Codable, Hashable {
     var id, name, link: String?
     var spotlight: Bool?
     var alias: String?
@@ -145,11 +143,11 @@ struct TopResultArtist: Hashable {
 }
 
 // MARK: - VideoResult
-struct VideoResult: Hashable {
+struct VideoResult: Codable, Hashable {
     var encodeID, title, alias: String?
     var isOffical: Bool?
     var username, artistsNames: String?
-    var artists: [SongResultArtistResult]?
+    var artists: [SongArtistResult]?
     var isWorldWide: Bool?
     var thumbnailM: String?
     var link: String?
@@ -159,7 +157,7 @@ struct VideoResult: Hashable {
 }
 
 // MARK: - PurpleArtistResult
-struct PurpleArtistResult: Hashable {
+struct PurpleArtistResult: Codable, Hashable {
     var id, name, link: String?
     var spotlight: Bool?
     var alias, playlistID: String?

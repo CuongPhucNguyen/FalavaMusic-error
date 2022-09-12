@@ -13,10 +13,10 @@ import Foundation
 
 class SearchGetter: ObservableObject{
     
-    let ZingClass = ZingCollectorLink();
+    let ZingClass = ZingCollectorLink()
     var apiState: APIState = .loading
     var prediction: Prediction?
-    
+    var results: SearchResultsModel?
     
     
     func suggestion(JsonUrl: String) async -> [Suggestion] {
@@ -79,6 +79,37 @@ class SearchGetter: ObservableObject{
         print(st)
     }
     
+    
+    
+    
+    
+    func getTopResult(keywordInput: String) async -> SearchResultsModel {
+        if let url = URL(string: ZingClass.getSearchResults(searchValue: SearchGetter.inputFormatter(keywords: keywordInput))) {
+            let request = URLRequest(url: url)
+            do{
+                let (data, response) = try await URLSession.shared.data(for: request)
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    print("search result error 200")
+                    throw APIError.error("Link Repose Fail")
+                }
+                let decoded = try JSONDecoder().decode(SearchResultsModel.self, from: data) // ZingHome
+                
+                if(decoded.err == -201){
+                    print("search result error -201")
+                    Task{
+                        await getTopResult(keywordInput: keywordInput)
+                    }
+                } else{
+                    return (decoded)
+                }
+            
+            } catch {
+                print("search result caught")
+                apiState = .failure(APIError.error(error.localizedDescription))
+            }
+        }
+        return SearchResultsModel.init()
+    }
     
     
     func getString(JsonUrl: String) async -> String{

@@ -16,6 +16,7 @@ struct SearchScreen: View {
     @State var keywordSuggestions: [Keyword] = []
     @State var suggestedObjects: [Suggestion] = []
     @State var bgDisplay = false
+    @State var results = SearchResultsModel.init()
 
     
     var body: some View {
@@ -43,7 +44,9 @@ struct SearchScreen: View {
                         })
                         .onSubmit{
                             Task{
-                                await searchResults.searchResults(searchId:SearchGetter.inputFormatter(keywords:"take me home"))
+                                await searchResults.searchResults(searchId:SearchGetter.inputFormatter(keywords: keyword))
+                                await results = searchResults.getTopResult(keywordInput: keyword)
+                                print(results.data?.TopResult ?? "")
                             }
                         }
                         .foregroundColor(.white)
