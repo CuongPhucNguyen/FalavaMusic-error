@@ -14,9 +14,10 @@ struct TopRow : View{
     var body : some View{
         ZStack{
             RoundedRectangle(cornerSize: CGSize.init(width: 5, height: 5))
-                .foregroundColor(Color.init(red: 10, green: 10, blue: 10, opacity: 10))
+                .foregroundColor(Color.init(red: 10, green: 10, blue: 10, opacity: 100))
+                .frame(width: UIScreen.main.bounds.width - 10, height: 20)
             HStack{
-                AsyncImage(url: URL(string: (topResult.data!.top!.encodedID != nil) ? topResult.data!.top!.title! : ((topResult.data!.top!.id != nil) ? topResult.data!.top!.name! : ""))) { image in
+                AsyncImage(url: URL(string:topResult.data?.top?.title ?? topResult.data?.top?.name ?? "")) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -26,17 +27,27 @@ struct TopRow : View{
                         ProgressView()
                     }
                     .frame(width: 50, height: 50)
+                Spacer()
                 VStack{
-                    Text(((topResult.data != nil) ? (topResult.data!.top!.encodedID != nil) ? topResult.data!.top!.title! : ((topResult.data!.top!.id != nil) ? topResult.data!.top!.name! : "") : ""))
+                    Text(topResult.data?.top?.title ?? topResult.data?.top?.name ?? "")
                         .foregroundColor(.white)
-                    Text(((topResult.data != nil) ? (topResult.data!.top!.encodedID != nil) ? "Song" : ((topResult.data!.top!.id != nil) ? "Artist" : "") : ""))
+                    Text((topResult.data?.top?.title != nil ? "Song" : (topResult.data?.top?.name != nil ? "Artist" : "")))
                         .foregroundColor(.gray)
                 }
                 
             }
+            .frame(width: UIScreen.main.bounds.width - 10, height: 60)
         }
     }
     init(topResult: SearchResultsModel){
         self.topResult = topResult
+    }
+}
+
+
+
+struct preview : PreviewProvider {
+    static var previews: some View{
+        TopRow(topResult: SearchResultsModel.init())
     }
 }

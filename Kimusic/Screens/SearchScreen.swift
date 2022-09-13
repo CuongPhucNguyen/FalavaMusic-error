@@ -18,7 +18,6 @@ struct SearchScreen: View {
     @State var bgDisplay = false
     @State var results = SearchResultsModel.init()
     @State var hidden = false
-    @State var placeholder = SearchResultsModel.init()
 
     
     var body: some View {
@@ -55,16 +54,14 @@ struct SearchScreen: View {
                         .foregroundColor(.white)
                         .frame(width: UIScreen.main.bounds.width - 20, height: 50)
                 }
-                SearchResultView(results: results.data != nil ? results : placeholder)
-                ScrollSearch(keyword: $keywordSuggestions, suggestion: $suggestedObjects, hidden: $hidden)
+                ZStack{
+                    ScrollSearch(keyword: $keywordSuggestions, suggestion: $suggestedObjects, hidden: $hidden)
+                }
+                
                 
                 
             }
         }
-    }
-    init(){
-        self.placeholder.data = DataClassResult.init()
-        self.placeholder.data!.top = TopResult.init()
     }
 }
 
